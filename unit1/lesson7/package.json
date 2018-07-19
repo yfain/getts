@@ -1,0 +1,14 @@
+{
+  "name": "unit1_blockchain",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "serve",
+    "tsc": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^10.5.1",
+    "serve": "^9.1.2",
+    "typescript": "^2.9.2"
+  }
+}
