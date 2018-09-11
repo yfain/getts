@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",    
+        "noEmitOnError": true, 
+        "lib": ["dom", "es2015"]         
+    }
+  }

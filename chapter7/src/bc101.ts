@@ -14,7 +14,10 @@ class Block {
 
   private calculateHash(): string {
     const data = this.index + this.previousHash + this.timestamp + this.data;
-    return crypto.createHash('sha256').update(data).digest('hex');
+    return crypto
+             .createHash('sha256')
+             .update(data)
+             .digest('hex');
   }
 };
 
@@ -42,7 +45,7 @@ class Blockchain {
   }
 }
 
-console.log('Initializing the blockchain, creating the genesis block...');
+console.log('Creating the blockchain with the genesis block...');
 const blockchain = new Blockchain();
 
 console.log('Mining block #1...');

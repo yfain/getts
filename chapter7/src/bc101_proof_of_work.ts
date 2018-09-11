@@ -26,7 +26,7 @@ class Block {
 
     do {
       hash = this.calculateHash(++nonce);
-    } while (hash.startsWith('0000') === false);
+    } while (hash.startsWith('00000') === false);
 
     return { nonce, hash };
   }
@@ -56,7 +56,7 @@ class Blockchain {
   }
 }
 
-console.log('Initializing the blockchain, creating the genesis block...');
+console.log('Creating the blockchain with the genesis block...');
 const blockchain = new Blockchain();
 
 console.log('Mining block #1...');
