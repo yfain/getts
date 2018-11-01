@@ -3,4 +3,4 @@ function getFinalPrice(price: number, discount: number) {
 }
 
 console.log(getFinalPrice(100, 10));    
-console.log(getFinalPrice(100, "10%"));
+// console.log(getFinalPrice(100, "10%"));

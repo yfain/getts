@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blockchain</title>
+  <link rel="stylesheet" href="dist/styles.css">
+  <script type="module" src="dist/browser/main.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Blockchain</h1>
+
+    <aside>
+      <p id="status">⏳ Initializing the blockchain, creating the genesis block...</p>
+    </aside>
+
+    <section>
+      <h2>Add transaction</h2>
+      <form>
+        <input  id="sender"    type="text"   autocomplete="off" disabled placeholder="Sender"><span>→</span>
+        <input  id="recipient" type="text"   autocomplete="off" disabled placeholder="Recipient">
+        <input  id="amount"    type="number" autocomplete="off" disabled placeholder="Amount">
+        <button id="transfer"  type="button" class="ripple" disabled>TRANSFER MONEY</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Pending transactions</h2>
+      <pre id="pending-transactions">No pending transactions at the moment.</pre>
+      <button id="confirm" type="button" class="ripple" disabled>CONFIRM TRANSACTIONS</button>
+      <div class="clear"></div>
+    </section>
+
+    <section>
+      <h2>Blockchain state</h2>
+      <div class="wrapper">
+        <div id="blocks"></div>
+        <div id="overlay"></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

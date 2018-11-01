@@ -1,5 +1,5 @@
 {
-  "name": "unit1_blockchain",
+  "name": "TypeScript_Quickly_chapter7",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
@@ -8,6 +8,6 @@
   },
   "devDependencies": {
     "@types/node": "^10.5.1",
-    "typescript": "^2.9.2"
+    "typescript": "~3.0.0"
   }
 }
