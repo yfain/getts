@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+  	"module": "commonjs",
+    "outDir": "./dist",
+    "target": "es2015",
+    "lib": [
+      "es2015"
+    ]
+  }
+}

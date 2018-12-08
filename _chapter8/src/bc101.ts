@@ -34,7 +34,6 @@ class Blockchain {
   }
 
   addBlock(data: string): void {
-
     const block = new Block(
       this.latestBlock.index + 1,
       this.latestBlock.hash,

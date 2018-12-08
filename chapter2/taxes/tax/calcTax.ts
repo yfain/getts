@@ -9,9 +9,9 @@ export function calcTax(income: number, state: string = 'NY',
         deduction = 0;
     }
 
-    if (state == 'NY'){
+    if (state === 'NY'){
         return income*0.06 - deduction;
-    } else if (state=='NJ'){
+    } else if (state ==='NJ'){
         return income*0.05  - deduction;
     }
 }
