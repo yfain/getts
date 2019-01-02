@@ -1,3 +1,3 @@
 import * as chalk from 'chalk';
 
-console.log(chalk.default.bold.whiteBright.bgMagentaBright(`I've been bundled by the Webpack`));
+console.log(chalk.default.bold.whiteBright.bgMagentaBright('Bundled by the Webpack'));
