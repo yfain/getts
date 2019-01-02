@@ -1,0 +1,18 @@
+{
+  "name": "webpack-typescript",
+  "description": "Code sample for the TypeScript Quickly book",
+  "homepage": "https://www.manning.com/books/typescript-quickly",
+  "license": "MIT",
+  "scripts": {
+    "webpack": "webpack"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1"
+  },
+  "devDependencies": {
+    "ts-loader": "^5.3.2",
+    "typescript": "^3.2.2",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2"
+  }
+}

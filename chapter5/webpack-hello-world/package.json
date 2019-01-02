@@ -1,0 +1,16 @@
+{
+  "name": "webpack-hello-world",
+  "description": "Code sample for the TypeScript Quickly book",
+  "homepage": "https://www.manning.com/books/typescript-quickly",
+  "license": "MIT",
+  "scripts": {
+    "webpack": "webpack"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2"
+  }
+}
