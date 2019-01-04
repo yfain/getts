@@ -1,3 +1,3 @@
 import * as chalk from 'chalk';
 
-console.log(chalk.default.bold.whiteBright.bgMagentaBright('Built with ncc'));
+console.log(chalk.default.black.bgYellowBright('Built with ncc'));
