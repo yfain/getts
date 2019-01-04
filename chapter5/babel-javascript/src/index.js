@@ -1,3 +1,5 @@
-import * as chalk from 'chalk';
+const chalk = require('chalk');
 
-console.log(chalk.default.black.bgYellowBright('Built with Babel'));
+const message = 'Built with Babel';
+
+console.log(chalk.default.black.bgGreenBright(message));

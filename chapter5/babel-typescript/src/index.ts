@@ -1,5 +1,5 @@
 import * as chalk from 'chalk';
 
-const message: string = 'Bundled by the Webpack';
+const message: string = 'Built with Babel';
 
 console.log(chalk.default.black.bgGreenBright(message));

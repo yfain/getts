@@ -1,3 +1,5 @@
 const chalk = require('chalk');
 
-console.log(chalk.default.black.bgYellowBright('Bundled by the Webpack'));
+const message = 'Bundled by the Webpack';
+
+console.log(chalk.default.black.bgGreenBright(message));
