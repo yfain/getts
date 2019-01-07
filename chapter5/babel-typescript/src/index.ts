@@ -1,5 +1,5 @@
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 
 const message: string = 'Built with Babel';
 
-console.log(chalk.default.black.bgGreenBright(message));
+console.log(chalk.black.bgGreenBright(message));

@@ -2,4 +2,4 @@ const chalk = require('chalk');
 
 const message = 'Built with Babel';
 
-console.log(chalk.default.black.bgGreenBright(message));
+console.log(chalk.black.bgGreenBright(message));
