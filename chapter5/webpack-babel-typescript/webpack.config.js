@@ -11,7 +11,7 @@ module.exports = {
             {
                 test: /\.ts$/,
                 exclude: /node_modules/,
-                use: 'ts-loader' // picks up existing tsconfig.json
+                use: 'babel-loader'
             }
         ]
     },
