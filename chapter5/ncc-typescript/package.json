@@ -1,0 +1,16 @@
+{
+    "name": "ncc-typescript",
+    "description": "Code sample for the TypeScript Quickly book",
+    "homepage": "https://www.manning.com/books/typescript-quickly",
+    "license": "MIT",
+    "scripts": {
+        "start": "ncc run src/index.ts",
+        "build": "ncc build src/index.ts -o dist -m"
+    },
+    "dependencies": {
+        "chalk": "^2.4.1"
+    },
+    "devDependencies": {
+        "@zeit/ncc": "^0.8.1"
+    }
+}

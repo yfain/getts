@@ -1,0 +1,20 @@
+{
+    "name": "webpack-babel-typescript",
+    "description": "Code sample for the TypeScript Quickly book",
+    "homepage": "https://www.manning.com/books/typescript-quickly",
+    "license": "MIT",
+    "scripts": {
+        "webpack": "webpack"
+    },
+    "dependencies": {
+        "chalk": "^2.4.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.2.2",
+        "@babel/preset-env": "^7.2.3",
+        "@babel/preset-typescript": "^7.1.0",
+        "babel-loader": "^8.0.5",
+        "webpack": "^4.28.3",
+        "webpack-cli": "^3.1.2"
+    }
+}
