@@ -1,0 +1,30 @@
+{
+  "name": "blockchain",
+  "version": "1.0.0",
+  "description": "Example application for the Manning's TypeScript Quickly book.",
+  "repository": "https://github.com/farata",
+  "license": "MIT",
+  "scripts": {
+    "build:client": "tsc -p src/client/tsconfig.client.json",
+    "build:server": "tsc -p src/server/tsconfig.server.json",
+    "build": "concurrently npm:build:*",
+    "start:tsc:client": "tsc -p src/client/tsconfig.client.json --watch",
+    "start:server": "nodemon --inspect src/server/main.ts",
+    "start": "concurrently npm:start:*",
+    "now-start": "NODE_ENV=production node build/server/main.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "lit-html": "^0.12.0",
+    "ws": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "@types/ws": "^6.0.1",
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.18.4",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.1",
+    "typescript-lit-html-plugin": "^0.6.0"
+  }
+}
