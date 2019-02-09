@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "es2018",
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "allowJs": true,
+        "outDir": "dist"
+        // "allowSyntheticDefaultImports": true
+    }
+}

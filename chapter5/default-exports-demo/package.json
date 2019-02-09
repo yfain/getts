@@ -1,0 +1,12 @@
+{
+  "name": "default-exports-demo",
+  "description": "Code sample for the TypeScript Quickly book",
+  "homepage": "https://www.manning.com/books/typescript-quickly",
+  "license": "MIT",
+  "scripts": {
+    "tsc": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.2"
+  }
+}
