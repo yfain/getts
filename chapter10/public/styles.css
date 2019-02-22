@@ -1,0 +1,292 @@
+:root {
+    --bg-color            : #ffffff;
+    --border-color        : #eaeaea;
+    --disabled-color      : #fafafa;
+    --text-color          : #000;
+    --secondary-text-color: #757575;
+    --default-fonts       : -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+/* LAYOUT */
+
+body {
+    background-color: var(--bg-color);
+    box-sizing: border-box;
+    font-family: var(--default-fonts);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 50px;
+}
+
+@media (max-width: 599px) {
+    main {
+        padding: 15px 5px;
+    }
+}
+
+section {
+    margin: 30px 0;
+}
+
+h1 {
+    color: var(--text-color);
+    font-size: 26px;
+    line-height: 1.1;
+    font-weight: 400;
+    margin: 0 0 30px 0;
+    padding: 0;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.clear {
+    clear: both;
+}
+
+@media (max-width: 599px) {
+    .hidden-xs {
+        display: none;
+    }
+}
+
+/* STATUS LINE */
+
+aside {
+    background: var(--disabled-color);
+}
+
+aside, pre {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0;
+}
+
+/* ADD TRANSACTION FORM */
+
+.add-transaction-form {
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) min-content minmax(100px, 1fr) 100px;
+    grid-auto-flow: row;
+    grid-gap: 15px 10px;
+    align-items: center;
+}
+
+.add-transaction-form button {
+    grid-column: -1 / 1;
+    justify-self: end;
+}
+
+@media (max-width: 599px) {
+    .add-transaction-form {
+        grid-template-columns: 1fr;
+        grid-gap: 5px;
+    }
+}
+
+/* PENDING TRANSACTIONS */
+
+.pending-transactions__list {
+    min-height: 70px;
+    margin-bottom: 15px;
+}
+
+.pending-transactions__form {
+    float: right;
+}
+
+@media (max-width: 599px) {
+    .pending-transactions__list {
+        margin-bottom: 5px;
+    }
+}
+
+/* BLOCKS PANEL */
+
+.blocks {
+    position: relative;
+}
+
+.blocks__ribbon {
+    display: flex;
+    overflow-y: auto;
+}
+
+.blocks__overlay {
+    position: absolute;
+    width: 80px;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0.5) 20%, rgba(255,255,255,0.5) 100%);
+}
+
+@media (max-width: 599px) {
+    .blocks__ribbon {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .blocks__overlay {
+        display: none;
+    }
+}
+
+/* BLOCK */
+
+.block {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    font-size: 12px;
+    min-width: 250px;
+    max-width: 250px;
+    margin-right: 15px;
+}
+
+@media (max-width: 599px) {
+    .block {
+        max-width: 100%;
+        margin-right: 0px;
+    }
+
+    .block:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.block__header {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.block__index {
+    font-size: 20px;
+    font-weight: bold;
+    flex: 1;
+}
+
+.block__timestamp {
+    color: var(--secondary-text-color);
+    align-self: center;
+}
+
+.block__label {
+    color: var(--secondary-text-color);
+    font-size: 11px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.block__hashes {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.block__hash {
+    width: 50%;
+}
+
+.block__hash:first-child {
+    margin-right: 15px;
+    width: calc(50% - 15px);
+}
+
+.block__hash:last-child
+.block__label {
+    text-align: right;
+}
+
+.block__hash-value {
+    font-family: monospace;
+    font-size: 14px;
+    overflow-x: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+}
+
+.block__transactions {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* FORM CONTROLS */
+
+input[type=text], input[type=number] {
+    background-color: transparent;
+    border-color: var(--border-color);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: none;
+    box-sizing: border-box;
+    display: block;
+    font-family: var(--default-fonts);
+    font-size: 14px;
+    height: 37px;
+    line-height: 27px;
+    margin: 0px auto;
+    outline: none;
+    padding: 4px 10px;
+    width: 100%;
+}
+
+input[disabled] {
+    cursor: not-allowed;
+}
+
+button {
+    background: var(--text-color);
+    border-radius: 5px;
+    border: 1px solid var(--text-color);
+    color: var(--bg-color);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    height: 37px;
+    min-width: 200px;
+    outline: none;
+    padding: 0 25px;
+    text-align: center;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+button[disabled] {
+    background: var(--disabled-color);
+    border-color: var(--border-color);
+    color: #ccc;
+    cursor: auto;
+    pointer-events: none;
+}
+
+/* Ripple effect */
+.ripple {
+    background-position: center;
+    transition: background 0.4s;
+}
+
+.ripple:hover {
+    background: var(--text-color) radial-gradient(circle, transparent 1%, #444 1%) center/15000%;
+    color: var(--bg-color);
+}
+
+.ripple:active {
+    background-color: var(--text-color);
+    background-size: 100%;
+    transition: background 0s;
+    will-change: background;
+}

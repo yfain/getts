@@ -86,3 +86,21 @@ function generateBlockHtml(block: Block, index: number) {
     </div>
   `;
 }
+
+interface Person {
+  name?: string;
+  age?: number;
+}
+
+const worker1: Person = { name: "John"};
+
+
+
+
+
+const worker2: Required<Person> = { name: "John"};
+
+
+
+
+
