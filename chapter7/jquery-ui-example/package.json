@@ -1,0 +1,11 @@
+{
+  "name": "jquery-ui-example",
+  "description": "Code sample for the TypeScript Quickly book",
+  "homepage": "https://www.manning.com/books/typescript-quickly",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jquery": "^3.3.29",
+    "@types/jqueryui": "^1.12.7",
+    "typescript": "^3.4.1"
+  }
+}
