@@ -26,6 +26,18 @@
     #shapes > *:not(:last-child) {
       margin-right: 32px;
     }
+    
+    @media (max-width: 640px) {
+      #shapes {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #shapes > *:not(:last-child) {
+        margin-bottom: 16px;
+        margin-right: 0;
+      }
+    }
 
     #rectangle {
       background-color: blue;
@@ -45,13 +57,27 @@
       height: 100px;
       width: 150px;
     }
+
+    #selector {
+      min-width: 220px;
+    }
+
+    #error {
+      color: red;
+    }
+    
+    #info {
+      color: blue;
+    }
   </style>
 </head>
 <body>
   <div id="shapes">
-    <div id="rectangle" hasAngles class="blue"></div>
+    <div id="rectangle" class="blue" hasAngles></div>
+
     <div id="circle" class="green"></div>
-    <div id="triangle" hasAngles class="green">
+
+    <div id="triangle" class="green" hasAngles>
       <svg viewBox="0 0 150 100">
         <polygon points="75, 0, 150, 100, 0, 100" fill="currentColor"/>
       </svg>
@@ -60,7 +86,9 @@
 
   <div class="ui-widget">
     <label for="selector">Selector:</label>
-    <input id="selector">
+    <input id="selector" placeholder="Enter a valid CSS selector">
+    <span id="error"></span>
+    <span id="info"></span>
   </div>
 
   <script src="index.js"></script>
