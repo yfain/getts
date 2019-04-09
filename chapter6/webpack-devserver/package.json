@@ -1,0 +1,19 @@
+{
+  "name": "webpack-devserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bundleup": "webpack-cli --watch",
+    "start": "webpack-dev-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.0",
+    "browser-sync-webpack-plugin": "^2.2.2"
+  }
+}

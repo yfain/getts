@@ -1,6 +1,6 @@
 {
   "name": "jquery-ui-example",
-  "description": "Code sample for the TypeScript Quickly book",
+  "description": "A code sample for the TypeScript Quickly book",
   "homepage": "https://www.manning.com/books/typescript-quickly",
   "license": "MIT",
   "devDependencies": {

@@ -1,0 +1,16 @@
+{
+  "name": "chapter7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/core-js": "^2.5.0",
+    "@types/jquery": "^3.3.29"
+  }
+}
