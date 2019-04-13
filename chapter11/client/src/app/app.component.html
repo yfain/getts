@@ -1,0 +1,70 @@
+<main>
+  <h1>Blockchain node</h1>
+  <aside><p>{{ statusLine }}</p></aside>
+  <section>
+    <h2>New transaction</h2>
+    <form class="add-transaction-form"
+          [formGroup]="transactionForm"
+          (ngSubmit)="enqueueTransaction()">
+      <input type="text"
+             name="sender"
+             autocomplete="off"
+             placeholder="Sender"
+             formControlName="sender">
+
+      <span class="hidden-xs">→</span>
+
+      <input type="text"
+             name="recipient"
+             autocomplete="off"
+             placeholder="Recipient"
+             formControlName="recipient">
+
+      <input type="number"
+             name="amount"
+             autocomplete="off"
+             placeholder="Amount"
+             formControlName="amount">
+
+      <button type="submit"
+              class="ripple"
+              [disabled]="transactionForm.invalid">ADD TRANSACTION</button>
+    </form>
+  </section>
+  <section>
+    <h2>Pending transactions</h2>
+    <pre class="pending-transactions__list">{{ formattedTransactions }}</pre>
+    <div class="pending-transactions__form">
+      <button type="button" class="ripple" (click)="generateBlock()">ADD TRANSACTION</button>
+    </div>
+    <div class="clear"></div>
+  </section>
+  <section>
+    <h2>Current blocks</h2>
+    <div class="blocks">
+      <div class="blocks__ribbon">
+        <div class="block" *ngFor="let block of node.chain; let index = index">
+          <div class="block__header">
+            <span class="block__index">#{{ index }}</span>
+            <span class="block__timestamp">{{ block.timestamp | date:'mediumTime' }}</span>
+          </div>
+          <div class="block__hashes">
+            <div class="block__hash">
+              <div class="block__label">← PREV HASH</div>
+              <div class="block__hash-value">{{ block.previousHash }}</div>
+            </div>
+            <div class="block__hash">
+              <div class="block__label">THIS HASH</div>
+              <div class="block__hash-value">{{ block.hash }}</div>
+            </div>
+          </div>
+          <div>
+            <div class="block__label">TRANSACTIONS</div>
+            <pre class="block__transactions">{{ formattedTransactionsFor(block) }}</pre>
+          </div>
+        </div>
+      </div>
+      <div class="blocks__overlay"></div>
+    </div>
+  </section>
+</main>
