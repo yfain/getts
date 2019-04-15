@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { BlockComponent } from './block/block.component';
 
+import { AppComponent } from './app.component';
+import { BlockComponent } from './block';
+import { TransactionFormComponent } from './transaction-form';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { BlockComponent } from './block/block.component';
   ],
   declarations: [
     AppComponent,
-    BlockComponent
+    BlockComponent,
+    TransactionFormComponent,
   ],
   bootstrap: [
     AppComponent

@@ -22,6 +22,10 @@ export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type WithoutHash<T> = Omit<T, 'hash'>;
 export type NotMinedBlock = Omit<Block, 'hash' | 'nonce'>;
 
+export function formatTransactions(transactions: Transaction[]): string {
+  return transactions.map(t =>`${t.sender} → ${t.recipient}: $${t.amount}`).join('\n');
+}
+
 @Injectable({
   providedIn: 'root'
 })

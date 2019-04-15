@@ -1,0 +1,28 @@
+<h2>New transaction</h2>
+<form class="add-transaction-form"
+      [formGroup]="transactionForm"
+      (ngSubmit)="enqueueTransaction()">
+  <input type="text"
+         name="sender"
+         autocomplete="off"
+         placeholder="Sender"
+         formControlName="sender">
+
+  <span class="hidden-xs">→</span>
+
+  <input type="text"
+         name="recipient"
+         autocomplete="off"
+         placeholder="Recipient"
+         formControlName="recipient">
+
+  <input type="number"
+         name="amount"
+         autocomplete="off"
+         placeholder="Amount"
+         formControlName="amount">
+
+  <button type="submit"
+          class="ripple"
+          [disabled]="transactionForm.invalid || node.isMining">ADD TRANSACTION</button>
+</form>
