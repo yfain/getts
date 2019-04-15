@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
+        "outDir": "dist",
         "types" : ["jquery", "es6-shim"],
-        "target" : "ES5"
+        "target" : "ES5",
+        "allowJs": true
     }
  }
