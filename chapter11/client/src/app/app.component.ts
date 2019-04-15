@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Message, MessageTypes } from './shared/messages';
-import { Block, BlockchainNodeService, Transaction, WebsocketService } from './shared/services';
+import { Block, BlockchainNodeService, formatTransactions, Transaction, WebsocketService } from './shared/services';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  readonly transactionForm: FormGroup;
-  
+  constructor(
+    private readonly server: WebsocketService,
+    readonly node: BlockchainNodeService
+  ) {
+    this.server.messageReceived.subscribe(message => this.handleServerMessages(message));
+    this.initializeBlockchain();
+  }
+
   get statusLine(): string {
     return (
       this.node.chainIsEmpty          ? '⏳ Initializing the blockchain...' :
@@ -25,21 +30,6 @@ export class AppComponent {
       : 'No pending transactions yet.';
   }
 
-  constructor(
-    private readonly server: WebsocketService,
-    readonly node: BlockchainNodeService,
-    fb: FormBuilder
-  ) {
-    this.transactionForm = fb.group({
-      sender   : [, Validators.required],
-      recipient: [, Validators.required],
-      amount   : [, Validators.required]
-    });
-
-    this.server.messageReceived.subscribe(message => this.handleServerMessages(message));
-    this.initializeBlockchain();
-  }
-
   private async initializeBlockchain() {
     const blocks = await this.server.requestLongestChain();
     if (blocks.length > 0) {
@@ -47,17 +37,6 @@ export class AppComponent {
     } else {
       await this.node.initializeWithGenesisBlock();
     }
-  }
-
-  enqueueTransaction() {
-    if (this.transactionForm.valid) {
-      this.node.addTransaction(this.transactionForm.value);
-      this.transactionForm.reset();
-    }
-  }
-
-  formattedTransactionsFor(block: Block): string {
-    return formatTransactions(block.transactions)
   }
 
   async generateBlock(): Promise<void> {
@@ -112,8 +91,4 @@ export class AppComponent {
     const newBlock = message.payload as Block;
     this.addBlock(newBlock, false);
   }
-}
-
-function formatTransactions(transactions: Transaction[]): string {
-  return transactions.map(t =>`${t.sender} → ${t.recipient}: $${t.amount}`).join('\n');
 }

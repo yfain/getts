@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { Message, MessageTypes, UUID } from '../messages';
 import { Block, Transaction } from './blockchain-node.service';
 import { CryptoService } from './crypto.service';
@@ -21,14 +22,16 @@ export class WebsocketService {
     return this._messageReceived.asObservable();
   }
 
+  // In Chapter 10 WebsocketController was instantiated with `new` keyword manually.
+  // In Angular all services instantiated for us by Injector automatically.
   constructor(private readonly crypto: CryptoService) {
     this.websocket = this.connect();
   }
 
   private get url(): string {
     const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    const hostname = window.location.host;
-    return `${protocol}://localhost:3000`;
+    const hostname = environment.wsHostname;
+    return `${protocol}://${hostname}`;
   }
 
   private connect(): Promise<WebSocket> {

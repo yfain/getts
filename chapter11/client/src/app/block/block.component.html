@@ -1,3 +1,20 @@
-<p>
-  block works!
-</p>
+<div class="block">
+  <div class="block__header">
+    <span class="block__index">#{{ index }}</span>
+    <span class="block__timestamp">{{ block.timestamp | date:'mediumTime' }}</span>
+  </div>
+  <div class="block__hashes">
+    <div class="block__hash">
+      <div class="block__label">← PREV HASH</div>
+      <div class="block__hash-value">{{ block.previousHash }}</div>
+    </div>
+    <div class="block__hash">
+      <div class="block__label">THIS HASH</div>
+      <div class="block__hash-value">{{ block.hash }}</div>
+    </div>
+  </div>
+  <div>
+    <div class="block__label">TRANSACTIONS</div>
+    <pre class="block__transactions">{{ formattedTransactions }}</pre>
+  </div>
+</div>
