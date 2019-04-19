@@ -11,9 +11,9 @@ export class TransactionFormComponent {
 
   constructor(readonly node: BlockchainNodeService, fb: FormBuilder) {
     this.transactionForm = fb.group({
-      sender   : [, Validators.required],
-      recipient: [, Validators.required],
-      amount   : [, Validators.required]
+      sender   : ['', Validators.required],
+      recipient: ['', Validators.required],
+      amount   : ['', Validators.required]
     });
   }
 

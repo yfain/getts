@@ -19,9 +19,9 @@
     <h2>Current blocks</h2>
     <div class="blocks">
       <div class="blocks__ribbon">
-        <app-block *ngFor="let block of node.chain; let index = index"
-                   [block]="block"
-                   [index]="index">
+        <app-block *ngFor="let blk of node.chain; let i = index"
+                   [block]="blk"
+                   [index]="i">
         </app-block>
       </div>
       <div class="blocks__overlay"></div>

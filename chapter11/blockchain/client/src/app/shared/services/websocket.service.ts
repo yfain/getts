@@ -50,7 +50,8 @@ export class WebsocketService {
       this.messagesAwaitingReply.get(message.correlationId).resolve(message);
       this.messagesAwaitingReply.delete(message.correlationId);
     } else {
-      // Unlike Chapter 10 version, the services are created for us by Angular DI,
+      // Unlike the chapter 10 version of the WebSocket communications,
+      // here the services are created for us by Angular DI,
       // so we cannot pass a messagesCallback as an argument. The conventional way
       // to notify about events in Angular is using Observables.
       this._messageReceived.next(message);
