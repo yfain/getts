@@ -15,6 +15,15 @@ export class AppComponent {
     this.initializeBlockchain();
   }
 
+  private async initializeBlockchain() {
+    const blocks = await this.server.requestLongestChain();
+    if (blocks.length > 0) {
+      this.node.initializeWith(blocks);
+    } else {
+      await this.node.initializeWithGenesisBlock();
+    }
+  }
+
   get statusLine(): string {
     return (
       this.node.chainIsEmpty          ? '⏳ Initializing the blockchain...' :
@@ -30,14 +39,7 @@ export class AppComponent {
       : 'No pending transactions yet.';
   }
 
-  private async initializeBlockchain() {
-    const blocks = await this.server.requestLongestChain();
-    if (blocks.length > 0) {
-      this.node.initializeWith(blocks);
-    } else {
-      await this.node.initializeWithGenesisBlock();
-    }
-  }
+  
 
   async generateBlock(): Promise<void> {
     // Let everyone in the network know about transactions need to be added to the blockchain.
