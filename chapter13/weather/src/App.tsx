@@ -46,13 +46,7 @@ const App: React.FC = () => {
     <>
       {/* In a real app I wouldn't pass each weather property as a separate prop. */}
       {has(weather) ? (
-        <WeatherInfo
-          temp={weather.temp}
-          temp_min={weather.temp_min}
-          temp_max={weather.temp_max}
-          humidity={weather.humidity}
-          pressure={weather.pressure}
-        />
+        <WeatherInfo weather={weather} />
       ) : (
         <h2>No weather available</h2>
       )}
