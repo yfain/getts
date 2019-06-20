@@ -9,7 +9,7 @@ const suffix = '&units=imperial&appid=d6c1dad3b2dd811ec34e5142a466f21b';
 
 const App: React.FC = () => {
   const [city, setCity] = useState('London');
-
+  const [msgFromChild, setMsgFromChild] = useState('');
   const [weather, setWeather] = useState<Weather | null>(null);
 
   useEffect(() => {
@@ -38,6 +38,8 @@ const App: React.FC = () => {
     console.log(weather);
   };
 
+  const getMsgFromChild = (msg: string) => setMsgFromChild(msg);
+
   return (
     <>
       <form onSubmit = {handleSubmit}>
@@ -45,8 +47,9 @@ const App: React.FC = () => {
                onInput = {handleChange} />
         <button type="submit">Get Weather</button>
       </form>
+      {msgFromChild}
       {has(weather) ? (
-        <WeatherInfo weather={weather} >
+        <WeatherInfo weather = {weather} parentChannel = {getMsgFromChild}>
          <strong>Hello from the parent!</strong>
          </WeatherInfo> 
       ) : (
