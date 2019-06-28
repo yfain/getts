@@ -63,6 +63,8 @@ const App: React.FC = () => {
     }
 
     initializeBlockchainNode();
+
+    return () => server.disconnect();
   }, [ handleServerMessages ]);
 
   useEffect(() => {
@@ -129,7 +131,7 @@ function getStatus(node: BlockchainNode): string {
   return node.chainIsEmpty          ? '⏳ Initializing the blockchain...' :
          node.isMining              ? '⏳ Mining a new block...' :
          node.noPendingTransactions ? '📩 Add one or more transactions.' :
-                                      '✅ Ready to mine a new block.';
+                                      `✅ Ready to mine a new block (transactions: ${node.pendingTransactions.length}).`;
 }
 
 function formatTransactions(transactions: Transaction[]): string {
