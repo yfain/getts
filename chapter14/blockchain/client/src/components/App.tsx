@@ -65,9 +65,9 @@ const App: React.FC = () => {
     initializeBlockchainNode();
   }, [ handleServerMessages ]);
 
-  useEffect(() => {
+   useEffect(() => {
     setStatus(getStatus(node));
-  }, []);
+  }, []); 
 
   function addTransaction(transaction: Transaction): void {
     node.addTransaction(transaction);
@@ -75,7 +75,7 @@ const App: React.FC = () => {
   }
 
   async function generateBlock() {
-    // Let everyone in the network know about transactions need to be added to the blockchain.
+    // Let everyone in the network know that transactions need to be added to the blockchain.
     // Every node will try to generate a new block first for the provided transactions.
     server.requestNewBlock(node.pendingTransactions);
     const miningProcessIsDone = node.mineBlockWith(node.pendingTransactions);
