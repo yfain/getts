@@ -28,6 +28,10 @@ export class WebsocketController {
     });
   }
 
+  disconnect() {
+    this.websocket.then(ws => ws.close());
+  }
+
   private readonly onMessageReceived = (event: MessageEvent) => {
     const message = JSON.parse(event.data) as Message;
 
