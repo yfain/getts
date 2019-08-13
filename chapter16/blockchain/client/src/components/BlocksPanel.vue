@@ -15,19 +15,16 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Block from './Block.vue';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Block } from '@/lib/blockchain-node';
+import BlockComponent from './Block.vue';
 
-export default Vue.extend({
-  name: 'BlocksPanel',
+@Component({
   components: {
-    Block
-  },
-  props: {
-    blocks: {
-      type: Array,
-      required: true
-    }
+    Block: BlockComponent
   }
-});
+})
+export default class BlocksPanel extends Vue {
+  @Prop({ type: Array, required: true }) readonly blocks: Block[];
+}
 </script>

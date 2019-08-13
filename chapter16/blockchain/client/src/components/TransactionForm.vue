@@ -7,7 +7,7 @@
         name="sender"
         placeholder="Sender"
         autoComplete="off"
-        v-model.trim="sender"
+        v-model.trim="formValue.sender"
         :disabled="disabled">
 
       <span class="hidden-xs">→</span>
@@ -18,18 +18,18 @@
         placeholder="Recipient"
         autoComplete="off"
         :disabled="disabled"
-        v-model.trim="recipient">
+        v-model.trim="formValue.recipient">
 
       <input
         type="number"
         name="amount"
         placeholder="Amount"
         :disabled="disabled"
-        v-model.number="amount">
+        v-model.number="formValue.amount">
 
       <button type="submit"
               class="ripple"
-              :disabled="!isValid || disabled">
+              :disabled="!isValid() || disabled">
         ADD TRANSACTION
       </button>
     </form>
@@ -37,44 +37,44 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
-export default Vue.extend({
-  name: 'TransactionForm',
+interface FormValue {
+  sender: string;
+  recipient: string;
+  amount: number;
+}
 
-  props: {
-    disabled: Boolean
-  },
+@Component
+export default class TransactionForm extends Vue {
 
-  data: function () {
+  @Prop(Boolean) readonly disabled: boolean;
+  
+  formValue: FormValue = this.defaultFormValue();
+
+  isValid() {
+    return (
+      this.formValue.sender &&
+      this.formValue.recipient &&
+      this.formValue.amount > 0
+    );
+  }
+
+  handleFormSubmit() {
+    if (this.isValid()) {
+      this.$emit('add-transaction', { ...this.formValue });
+
+      // Reset form:
+      this.formValue = this.defaultFormValue();
+    }
+  }
+
+  private defaultFormValue(): FormValue {
     return {
       sender: '',
       recipient: '',
       amount: 0
     };
-  },
-
-  computed: {
-    isValid: function () {
-      return this.sender && this.recipient && this.amount > 0;
-    }
-  },
-
-  methods: {
-    handleFormSubmit() {
-      if (this.isValid) {
-        this.$emit('add-transaction', {
-          sender: this.sender,
-          recipient: this.recipient,
-          amount: this.amount
-        });
-
-        // Reset form:
-        this.sender = '';
-        this.recipient = '';
-        this.amount = 0;
-      }
-    }
   }
-});
+}
 </script>
