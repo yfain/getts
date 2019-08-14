@@ -38,19 +38,14 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-
-interface FormValue {
-  sender: string;
-  recipient: string;
-  amount: number;
-}
+import { Transaction } from '../lib/blockchain-node';
 
 @Component
 export default class TransactionForm extends Vue {
 
   @Prop(Boolean) readonly disabled: boolean;
   
-  formValue: FormValue = this.defaultFormValue();
+  formValue: Transaction = this.defaultFormValue();
 
   isValid() {
     return (
@@ -69,7 +64,7 @@ export default class TransactionForm extends Vue {
     }
   }
 
-  private defaultFormValue(): FormValue {
+  private defaultFormValue(): Transaction {
     return {
       sender: '',
       recipient: '',
