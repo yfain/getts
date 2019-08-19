@@ -13,7 +13,7 @@ const App: React.FC = () => {
   const [weather, setWeather] = useState<Weather | null>(null);
 
   useEffect(() => {
-    getWeather(city);
+    getWeather(city);  // this line causes the warning msg in browser's console
   }, []);
 
   async function getWeather(location: string) {

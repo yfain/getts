@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+    <body>
+        <div id="one">
+            <h1>{{greeting}}</h1>
+        </div>
+        <div id="two">
+            <h1>{{greeting}}</h1>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <script type="text/javascript">
+          const myApp = new Vue({
+              el: "#one",
+              data: {
+                  greeting: "Hello World"
+              }
+          })
+        </script>
+    </body>
+</html>
