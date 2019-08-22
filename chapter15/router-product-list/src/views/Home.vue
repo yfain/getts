@@ -46,12 +46,12 @@ export default class Home extends Vue {
     .then(json => {
       this.products=json;
     },
-    error => {
+    (error) => {
        console.log('Error loading products.json:', error);
     });
   }
 
-  onSelect(prod: Product): void {
+  private onSelect(prod: Product): void {
     this.selectedProduct = prod;
    }
 }
