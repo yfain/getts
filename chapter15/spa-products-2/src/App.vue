@@ -1,18 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
-      <template v-for="(product, index) in products">
-        <router-link
-          v-bind:key="product.id"
-          v-bind:to="'/products/' + product.id">
-          {{ product.title }}
-        </router-link>
-        <span
-          v-bind:key="product.id + '|'"
-          v-if="index !== products.length - 1">
-          &nbsp;|&nbsp;
-        </span>
-      </template>
+      <ul>
+        <li v-for="product in products"
+            v-bind:key="product.id">
+          <router-link v-bind:to="'/products/' + product.id">
+            {{ product.title }}
+          </router-link>
+        </li>
+      </ul>
+      <p>Click on a product to see details</p>
     </div>
     <router-view/>
   </div>
@@ -52,6 +49,7 @@ export default class App extends Vue {
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {

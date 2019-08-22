@@ -17,12 +17,11 @@ import { Product } from '@/product';
 @Component({
   async beforeRouteEnter(to: Route, from: Route, next: any) {
     const product = await fetchProductByID(to.params.productId);
-    next((vm) => vm.product = product);
+    next((component) => component.product = product);
   },
 
   async beforeRouteUpdate(to: Route, from: Route, next: any) {
-    const product = await fetchProductByID(to.params.productId);
-    this.product = product;
+    this.product = await fetchProductByID(to.params.productId);
     next();
   },
 })
