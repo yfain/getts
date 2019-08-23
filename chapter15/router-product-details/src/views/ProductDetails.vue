@@ -15,12 +15,12 @@ import { Route } from 'vue-router';
 import { Product } from '@/product';
 
 @Component({
-  async beforeRouteEnter(to: Route, from: Route, next: any) {
+  async beforeRouteEnter(to: Route, from: Route, next: Function) {
     const product = await fetchProductByID(to.params.productId);
     next((component) => component.product = product);
   },
 
-  async beforeRouteUpdate(to: Route, from: Route, next: any) {
+  async beforeRouteUpdate(to: Route, from: Route, next: Function) {
     this.product = await fetchProductByID(to.params.productId);
     next();
   },
