@@ -56,12 +56,10 @@ export default class TransactionForm extends Vue {
   }
 
   handleFormSubmit() {
-    if (this.isValid()) {
       this.$emit('add-transaction', { ...this.formValue });
 
-      // Reset form:
+      // Reset the form
       this.formValue = this.defaultFormValue();
-    }
   }
 
   private defaultFormValue(): Transaction {
