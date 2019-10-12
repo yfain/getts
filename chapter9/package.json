@@ -8,9 +8,9 @@
     "deploy": "copyfiles -f src/browser/*.html src/browser/*.css dist"
   },
   "devDependencies": {
-    "@types/node": "^10.5.1",
-    "serve": "^10.0.2",
-    "copyfiles": "^2.1.0",
+    "@types/node": "^10.14.21",
+    "copyfiles": "^2.1.1",
+    "serve": "^10.1.2",
     "typescript": "~3.0.0"
   }
 }
