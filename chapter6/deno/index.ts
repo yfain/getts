@@ -1,4 +1,4 @@
-import { bgGreen, black } from 'https://deno.land/std/colors/mod.ts';
+import { bgGreen, black } from 'https://deno.land/std/fmt/colors.ts';
 
 const message: string = 'Ran with deno!';
 
