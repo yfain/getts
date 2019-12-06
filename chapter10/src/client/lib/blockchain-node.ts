@@ -17,7 +17,6 @@ export interface Block {
   readonly transactions: Transaction[];
 }
 
-export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type WithoutHash<T> = Omit<T, 'hash'>;
 export type NotMinedBlock = Omit<Block, 'hash' | 'nonce'>;
 
