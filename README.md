@@ -6,19 +6,19 @@ Chapter 10 implements a notification server that communicates with the nodes vie
 
 To start the blockchain apps with the client in Angular, React, and Vue run npm install followed by these commands:
 
-Angular&nbsp;
- Server: npm start&nbsp;
- Client: npm start&nbsp;
- Open your browser at localhost:4200&nbsp;  
+Angular<br/>
+ Server: npm start<br/>
+ Client: npm start<br/>
+ Open your browser at localhost:4200<br/>  
 
-React&nbsp;
- Server: npm start&nbsp; 
- Client: npm start&nbsp;
- Open your browser at localhost:3001&nbsp; 
+React<br/>
+ Server: npm start<br/> 
+ Client: npm start<br/>
+ Open your browser at localhost:3001<br/> 
 
-Vue&nbsp;
- Server: npm start&nbsp;
- Client: npm run serve&nbsp; 
- Open your browser at localhost:8080&nbsp; 
+Vue<br/>
+ Server: npm start<br/>
+ Client: npm run serve<br/> 
+ Open your browser at localhost:8080<br/>
 
 The code of the blockchain projects was tested with the package versions specified in the respective package.json files. Upgrading any of the packages may break the code.
