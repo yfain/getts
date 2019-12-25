@@ -2,6 +2,8 @@
 
 This repository contains code samples from the book "TypeScript Quickly" by Yakov Fain and Anton Moiseev. This book is available at https://www.manning.com/books/typescript-quickly
 
+The playlist https://www.youtube.com/playlist?list=PLkKunJj_bZecSLIEeXEhUxD7e7aj7-fN3 has videos that illustrate some of the the book's materials. 
+
 Chapter 10 implements a notification server that communicates with the nodes vie the WebSockect protocol. To see it in action, run npm install and then npm start. After that, open your browser at localhost:3000.
 
 To start the blockchain apps with the client in Angular, React, and Vue run npm install followed by these commands:
