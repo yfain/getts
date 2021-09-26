@@ -2,6 +2,6 @@
 
 ````
 npm install
-tsc
+npm run compileDeploy
 npm start
 ````
