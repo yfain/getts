@@ -8,7 +8,7 @@ export interface Renderable<T> {
   render(data: T): TemplateResult;
 }
 
-export function titleize(text: string) {
+export function titleize(text: string): string {
   return text.toLowerCase().replace(/(?:^|\s|-)\S/g, x => x.toUpperCase());
 }
 
@@ -23,13 +23,14 @@ export function randomDelay(maxMilliseconds: number = 100): Promise<void> {
 }
 
 export namespace UI {
-  export function button(label: string, disabled: boolean = false) {
+  export function button(label: string, disabled: boolean = false): TemplateResult {
     return html`
       <button type="submit" ?disabled=${disabled} class="ripple">${label}</button>
     `;
   }
 
-  export function formField(name: string, value: any, changeHandler: EventListener, disabled: boolean = false, type: 'text' | 'number' = 'text') {
+  export function formField(name: string, value: any, changeHandler: EventListener,
+                            disabled: boolean = false, type: 'text' | 'number' = 'text'): TemplateResult {
     return html`
       <input name=${name}
              type=${type}
