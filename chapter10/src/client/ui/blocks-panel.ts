@@ -10,15 +10,15 @@ export class BlocksPanel implements Renderable<Readonly<Block[]>> {
     return html`
       <h2>Current blocks</h2>
       <div class="blocks">
-        <div class="blocks__ribbon">${repeat(blocks, b => b.hash, this.singleBlockCard)}</div>
+        <div class="blocks__ribbon">${repeat(blocks, (b: Block) => b.hash, this.singleBlockCard)}</div>
         <div class="blocks__overlay"></div>
       </div>
     `;
   }
 
   private readonly singleBlockCard = (block: Block, index: number): TemplateResult => {
-    const formattedTransactions = formatTransactions(block.transactions);
-    const timestamp = new Date(block.timestamp).toLocaleTimeString();
+    const formattedTransactions: string = formatTransactions(block.transactions);
+    const timestamp: string = new Date(block.timestamp).toLocaleTimeString();
 
     return html`
       <div class="block">

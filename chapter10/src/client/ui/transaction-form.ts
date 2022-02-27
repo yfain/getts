@@ -34,19 +34,19 @@ export class TransactionForm implements Renderable<Readonly<BlockchainNode>> {
     );
   }
 
-  private readonly onFieldChange = (event: Event) => {
+  private readonly onFieldChange = (event: Event): void => {
     const { type, name, value } = event.target as HTMLInputElement;
     this.transaction[name] = type === 'number' ? parseInt(value) : value;
     this.requestRendering();
   };
 
-  private enqueueTransaction(event: Event, node: Readonly<BlockchainNode>) {
+  private enqueueTransaction(event: Event, node: Readonly<BlockchainNode>): void {
     event.preventDefault();
     node.addTransaction(this.transaction);
     this.resetForm();
   }
 
-  private resetForm() {
+  private resetForm(): void {
     this.transaction = { sender: null, recipient: null, amount: null };
     this.requestRendering();
   }

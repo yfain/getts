@@ -14,15 +14,15 @@ export interface Block {
   readonly nonce: number;
   readonly previousHash: string;
   readonly timestamp: number;
-  readonly transactions: Transaction[];
+  readonly transactions: Array<Transaction>;
 }
 
 export type WithoutHash<T> = Omit<T, 'hash'>;
 export type NotMinedBlock = Omit<Block, 'hash' | 'nonce'>;
 
 export class BlockchainNode {
-  private _chain: Block[] = [];
-  private _pendingTransactions: Transaction[] = [];
+  private _chain: Array<Block> = [];
+  private _pendingTransactions: Array<Transaction> = [];
   private _isMining = false;
 
   initializeWith(blocks: Block[]): void {
@@ -40,7 +40,7 @@ export class BlockchainNode {
     let nonce = 0;
 
     do {
-      hash = await this.calculateHash({ ...block, nonce: ++nonce })
+      hash = await BlockchainNode.calculateHash({ ...block, nonce: ++nonce })
     } while (!hash.startsWith(HASH_REQUIREMENT));
 
     this._isMining = false;
@@ -48,13 +48,13 @@ export class BlockchainNode {
     return { ...block, hash, nonce };
   }
 
-  async mineBlockWith(transactions: Transaction[]): Promise<Block> {
+  async mineBlockWith(transactions: Array<Transaction>): Promise<Block> {
     // NOTE: INTRODUCING A RANDOM DELAY FOR DEMO PURPOSES.
     // We want to randomize block's timestamp creation so the node that generates transactions
     // doesn't have an advantage since it's timestamp will always be earlier.
     await randomDelay(500);
 
-    const block = { previousHash: this.latestBlock.hash, timestamp: Date.now(), transactions };
+    const block = { previousHash: this.latestBlock.hash, timestamp: Date.now(), transactions } as Block;
     return this.mineBlock(block);
   }
 
@@ -62,7 +62,7 @@ export class BlockchainNode {
     return this._isMining;
   }
 
-  get chain(): Block[] {
+  get chain(): Array<Block> {
     return [ ...this._chain ];
   }
 
@@ -74,12 +74,12 @@ export class BlockchainNode {
     return this._chain[this._chain.length - 1];
   }
 
-  get pendingTransactions(): Transaction[] {
+  get pendingTransactions(): Array<Transaction> {
     return [ ...this._pendingTransactions ];
   }
 
   get hasPendingTransactions(): boolean {
-    return this.pendingTransactions.length > 0;
+    return !this.noPendingTransactions;
   }
 
   get noPendingTransactions(): boolean {
@@ -110,7 +110,7 @@ export class BlockchainNode {
     }
 
     // Verify the hash of the new block against the hash of the previous block.
-    const newBlockHash = await this.calculateHash(newBlock);
+    const newBlockHash = await BlockchainNode.calculateHash(newBlock);
     const prevBlockHash = this._chain[previousBlockIndex].hash;
     const newBlockValid = (
       newBlockHash.startsWith(HASH_REQUIREMENT) &&
@@ -125,7 +125,7 @@ export class BlockchainNode {
     this._chain = [ ...this._chain, newBlock ];
   }
 
-  private async calculateHash(block: WithoutHash<Block>): Promise<string> {
+  private static async calculateHash(block: WithoutHash<Block>): Promise<string> {
     const data = block.previousHash + block.timestamp + JSON.stringify(block.transactions) + block.nonce;
     return sha256(data);
   }

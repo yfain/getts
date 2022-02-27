@@ -13,28 +13,28 @@ export abstract class MessageServer<T> {
       if (typeof data === 'string') {
         this.handleMessage(ws, JSON.parse(data));
       } else {
-        console.log('Received data of unsupported type.');
+        console.error('Received data of unsupported type.');
       }
     });
   };
 
   private readonly cleanupDeadClients = (): void => {
-    this.wsServer.clients.forEach(client => {
-      if (this.isDead(client)) {
-        this.wsServer.clients.delete(client);
+    this.clients.forEach((client: WebSocket) => {
+      if (MessageServer.isDead(client)) {
+        this.clients.delete(client);
       }
     });
   };
 
   protected broadcastExcept(currentClient: WebSocket, message: Readonly<T>): void {
-    this.wsServer.clients.forEach(client => {
-      if (this.isAlive(client) && client !== currentClient) {
-        client.send(JSON.stringify(message));
+    this.clients.forEach((client: WebSocket) => {
+      if (MessageServer.isAlive(client) && client !== currentClient) {
+        MessageServer.replyTo(client, message);
       }
     });
   }
 
-  protected replyTo(client: WebSocket, message: Readonly<T>): void {
+  protected static replyTo<T>(client: WebSocket, message: Readonly<T>): void {
     client.send(JSON.stringify(message));
   }
 
@@ -42,11 +42,11 @@ export abstract class MessageServer<T> {
     return this.wsServer.clients;
   }
 
-  private isAlive(client: WebSocket): boolean {
-    return !this.isDead(client);
+  private static isAlive(client: WebSocket): boolean {
+    return !MessageServer.isDead(client);
   }
 
-  private isDead(client: WebSocket): boolean {
+  private static isDead(client: WebSocket): boolean {
     return (
       client.readyState === WebSocket.CLOSING ||
       client.readyState === WebSocket.CLOSED

@@ -24,7 +24,7 @@ export class Application implements Renderable<void> {
     this.initializeBlockchain();
   }
 
-  private async initializeBlockchain() {
+  private async initializeBlockchain(): Promise<void> {
     const blocks = await this.server.requestLongestChain();
     if (blocks.length > 0) {
       this.node.initializeWith(blocks);
@@ -93,13 +93,13 @@ export class Application implements Renderable<void> {
     this.requestRendering();
   }
 
-  private readonly handleServerMessages = (message: Message) => {
+  private readonly handleServerMessages = (message: Message): void | Promise<void> => {
     switch (message.type) {
       case MessageTypes.GetLongestChainRequest: return this.handleGetLongestChainRequest(message);
       case MessageTypes.NewBlockRequest       : return this.handleNewBlockRequest(message);
       case MessageTypes.NewBlockAnnouncement  : return this.handleNewBlockAnnouncement(message);
       default: {
-        console.log(`Received message of unknown type: "${message.type}"`);
+        console.error(`Received message of unknown type: "${message.type}"`);
       }
     }
   }
@@ -113,7 +113,7 @@ export class Application implements Renderable<void> {
   }
 
   private async handleNewBlockRequest(message: Message): Promise<void> {
-    const transactions = message.payload as Transaction[];
+    const transactions = message.payload as Array<Transaction>;
     const newBlock = await this.node.mineBlockWith(transactions);
     this.addBlock(newBlock);
   }

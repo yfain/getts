@@ -22,7 +22,7 @@ export class WebsocketController {
   }
 
   private connect(): Promise<WebSocket> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject): void => {
       const ws = new WebSocket(this.url);
       ws.addEventListener('open', () => resolve(ws));
       ws.addEventListener('error', err => reject(err));
@@ -30,7 +30,7 @@ export class WebsocketController {
     });
   }
 
-  private readonly onMessageReceived = (event: MessageEvent) => {
+  private readonly onMessageReceived = (event: MessageEvent): void => {
     const message = JSON.parse(event.data) as Message;
 
     if (this.messagesAwaitingReply.has(message.correlationId)) {
@@ -53,7 +53,7 @@ export class WebsocketController {
     });
   }
 
-  async requestLongestChain(): Promise<Block[]> {
+  async requestLongestChain(): Promise<Array<Block>> {
     const reply = await this.send({
       type: MessageTypes.GetLongestChainRequest,
       correlationId: uuid()
@@ -61,7 +61,7 @@ export class WebsocketController {
     return reply.payload;
   }
 
-  requestNewBlock(transactions: Transaction[]): void {
+  requestNewBlock(transactions: Array<Transaction>): void {
     this.send({
       type: MessageTypes.NewBlockRequest,
       correlationId: uuid(),

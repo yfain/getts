@@ -16,7 +16,7 @@ export class BlockchainServer extends MessageServer<Message> {
             case MessageTypes.NewBlockRequest        : return this.handleAddTransactionsRequest(sender, message);
             case MessageTypes.NewBlockAnnouncement   : return this.handleNewBlockAnnouncement(sender, message);
             default: {
-                console.log(`Received message of unknown type: "${message.type}"`);
+                console.error(`Received message of unknown type: "${message.type}"`);
             }
         }
     }
@@ -29,23 +29,26 @@ export class BlockchainServer extends MessageServer<Message> {
             this.receivedMessagesAwaitingResponse.set(message.correlationId, requestor);
             this.sentMessagesAwaitingReply.set(message.correlationId, new Map()); // Map accumulates replies from clients
             this.broadcastExcept(requestor, message);
-        } else {
-            this.replyTo(requestor, {
-                type: MessageTypes.GetLongestChainResponse,
-                correlationId: message.correlationId,
-                payload: []
-            });
+            return;
         }
+
+        MessageServer.replyTo<Message>(requestor, {
+            type: MessageTypes.GetLongestChainResponse,
+            correlationId: message.correlationId,
+            payload: []
+        });
     }
 
     private handleGetLongestChainResponse(sender: WebSocket, message: Message): void {
         if (this.receivedMessagesAwaitingResponse.has(message.correlationId)) {
-            const requestor = this.receivedMessagesAwaitingResponse.get(message.correlationId);
+            const requestor: WebSocket = this.receivedMessagesAwaitingResponse.get(message.correlationId);
 
             if (this.everyoneReplied(sender, message)) {
-                const allReplies = this.sentMessagesAwaitingReply.get(message.correlationId).values();
-                const longestChain = Array.from(allReplies).reduce(this.selectTheLongestChain);
-                this.replyTo(requestor, longestChain);
+                const allReplies: IterableIterator<Message> = this.sentMessagesAwaitingReply
+                    .get(message.correlationId)
+                    .values();
+                const longestChain: Message = Array.from(allReplies).reduce(BlockchainServer.selectTheLongestChain);
+                MessageServer.replyTo<Message>(requestor, longestChain);
             }
         }
     }
@@ -61,16 +64,17 @@ export class BlockchainServer extends MessageServer<Message> {
     // NOTE: naive implementation that assumes no clients added or removed after the server requested the longest chain.
     // Otherwise the server may await a reply from a client that has never received the request.
     private everyoneReplied(sender: WebSocket, message: Message): boolean {
-        const repliedClients = this.sentMessagesAwaitingReply
+        const repliedClients: Replies = this.sentMessagesAwaitingReply
             .get(message.correlationId)
             .set(sender, message);
 
-        const awaitingForClients = Array.from(this.clients).filter(c => !repliedClients.has(c));
+        const awaitingForClients: Array<WebSocket> = Array.from(this.clients)
+            .filter((c: WebSocket) => !repliedClients.has(c));
 
         return awaitingForClients.length === 1; // 1 - the one who requested.
     }
 
-    private selectTheLongestChain(currentlyLongest: Message, current: Message, index: number) {
+    private static selectTheLongestChain(currentlyLongest: Message, current: Message, index: number): Message {
         return index > 0 && current.payload.length > currentlyLongest.payload.length ? current : currentlyLongest;
     }
 
