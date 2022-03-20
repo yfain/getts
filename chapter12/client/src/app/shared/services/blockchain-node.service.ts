@@ -18,8 +18,7 @@ export interface Block {
   readonly transactions: Transaction[];
 }
 
-export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
-export type WithoutHash<T> = Omit<T, 'hash'>;
+export type WithoutHash = Omit<Block, 'hash'>;
 export type NotMinedBlock = Omit<Block, 'hash' | 'nonce'>;
 
 export function formatTransactions(transactions: Transaction[]): string {
@@ -136,7 +135,7 @@ export class BlockchainNodeService {
     this._chain = [ ...this._chain, newBlock ];
   }
 
-  private async calculateHash(block: WithoutHash<Block>): Promise<string> {
+  private async calculateHash(block: WithoutHash): Promise<string> {
     const data = block.previousHash + block.timestamp + JSON.stringify(block.transactions) + block.nonce;
     return this.crypto.sha256(data);
   }

@@ -6,7 +6,9 @@ import { Block, formatTransactions } from '../shared/services';
   templateUrl: './block.component.html'
 })
 export class BlockComponent {
+  // @ts-ignore
   @Input() index: number;
+  // @ts-ignore
   @Input() block: Block;
 
   get formattedTransactions(): string {
