@@ -47,6 +47,7 @@ export class WebsocketService {
     const message = JSON.parse(event.data) as Message;
 
     if (this.messagesAwaitingReply.has(message.correlationId)) {
+      // @ts-ignore
       this.messagesAwaitingReply.get(message.correlationId).resolve(message);
       this.messagesAwaitingReply.delete(message.correlationId);
     } else {
@@ -61,11 +62,12 @@ export class WebsocketService {
   async send(message: Partial<Message>, awaitForReply: boolean = false): Promise<Message> {
     return new Promise<Message>(async (resolve, reject) => {
       if (awaitForReply) {
+        // @ts-ignore
         this.messagesAwaitingReply.set(message.correlationId, { resolve, reject });
       }
       this.websocket.then(
         ws => ws.send(JSON.stringify(message)),
-        () => this.messagesAwaitingReply.delete(message.correlationId)
+        () => this.messagesAwaitingReply.delete(message.correlationId as string)
       );
     });
   }
