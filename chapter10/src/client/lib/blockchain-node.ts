@@ -94,12 +94,12 @@ export class BlockchainNode {
    * Attempts to add a block into the blockchain. The rejected promise carries the reason why the block wasn't added.
    */
   async addBlock(newBlock: Block): Promise<void> {
-    const errorMessagePrefix = `⚠️ Block "${newBlock.hash.substr(0, 8)}" is rejected`;
+    const errorMessagePrefix = `⚠️ Block "${newBlock.hash.slice(0, 8)}" is rejected`;
 
     // Find the block after which the new block should be added.
     const previousBlockIndex = this._chain.findIndex(b => b.hash === newBlock.previousHash);
     if (previousBlockIndex < 0) {
-      throw new Error(`${errorMessagePrefix} - there is no block in the chain with the specified previous hash "${newBlock.previousHash.substr(0, 8)}".`);
+      throw new Error(`${errorMessagePrefix} - there is no block in the chain with the specified previous hash "${newBlock.previousHash.slice(0, 8)}".`);
     }
 
     // The current node may already have one or more blocks generated (or received from other nodes in the network),
