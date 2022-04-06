@@ -67,10 +67,6 @@ const App: React.FC = () => {
     return () => server.disconnect();
   }, [ handleServerMessages ]);
 
-   useEffect(() => {
-    setStatus(getStatus(node));
-  }, []); 
-
   function addTransaction(transaction: Transaction): void {
     node.addTransaction(transaction);
     setStatus(getStatus(node));
