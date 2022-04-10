@@ -36,23 +36,23 @@ import {Product} from '@/product';
 @Component
 export default class Home extends Vue {
 
-  products: Product[]=[];
+  private products: Product[] = [];
 
-  selectedProduct: Product | null= null;
+  private selectedProduct: Product | null = null;
 
-  created() {
-    fetch("/products.json")
-    .then(response => response.json())
-    .then(json => {
-      this.products=json;
+  public created() {
+    fetch('/products.json')
+    .then((response) => response.json())
+    .then((json) => {
+      this.products = json;
     },
     (error) => {
-       console.log('Error loading products.json:', error);
+       console.error('Error loading products.json:', error);
     });
   }
 
   private onSelect(prod: Product): void {
     this.selectedProduct = prod;
-   }
+  }
 }
 </script>
